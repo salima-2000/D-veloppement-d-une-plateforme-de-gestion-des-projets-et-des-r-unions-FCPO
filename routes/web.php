@@ -7,28 +7,48 @@ use App\Http\Controllers\devController;
 use App\Http\Controllers\chefProjetController;
 use App\Http\Controllers\choiceController;
 use Illuminate\Support\Facades\Route;
-
-
-Route::get('/', [loginController::class , 'login' ])->name('login');
+use App\Http\Controllers\gererReunion;
+use App\Http\Controllers\gererProjet;
+use App\Http\Controllers\gererTache;
+use App\Http\Controllers\Compte;
 Route::get('/choice', [choiceController::class , 'choice' ])->name('choice');
 Route::get('/Secretaire/notification', [SecretaireController::class , 'showNotifications' ])->name('Secretairenotification');
 Route::get('/Secretaire/reunions', [SecretaireController::class , 'showReunions' ])->name('Secretairereunions');
-Route::get('/Secretaire/compte', [SecretaireController::class , 'Secretairecompte' ])->name('Secretairecompte');
+Route::get('/Secretaire/compte', [Compte::class , 'Compte' ])->name('Secretairecompte');
 Route::get('/Secretaire/historique', [SecretaireController::class , 'Historique' ])->name('Secretairehistorique');
 
-Route::get('/Admin/notification', [AdminController::class , 'showNotifications' ])->name('Adminnotification');
+Route::get('/Admin/notification/', [AdminController::class , 'showNotifications' ])->name('Adminnotification');
 Route::get('/Admin/reunions', [AdminController::class , 'showReunions' ])->name('Adminreunions');
 Route::get('/Admin/equipes', [AdminController::class , 'showEquipes' ])->name('Adminequipes');
 Route::get('/Admin/historique', [AdminController::class , 'showHistorique' ])->name('Adminhistorique');
-Route::get('/Admin/compte', [AdminController::class , 'Compte' ])->name('Admincompte');
-
+Route::get('/Admin/compte', [Compte::class , 'Compte' ])->name('Admincompte');
+Route::get('/Admin/equipes/profilMembre/{id}', [AdminController::class , 'showProfil' ])->name('profilMembre');
 Route::get('/Admin/projets', [AdminController::class , 'GererProjets' ])->name('Adminprojets');
+Route::get('/Admin/projets/suivre/{id}', [AdminController::class , 'suivreProjet' ])->name('AdminSuivre');
+Route::get('/ChefProjet/projets/suivre/{id}', [chefProjetController::class , 'suivre' ])->name('ChefProjetSuivre');
+Route::get('/Developpeur/projets/suivre/{id}', [devController::class , 'suivre' ])->name('DeveloppeurSuivre');
 
 Route::get('/chefProjet/notification', [chefProjetController::class , 'showNotifications' ])->name('Chef Projetnotification');
-Route::get('/chefProjet/compte', [chefProjetController::class , 'Compte' ])->name('Chef Projetcompte');
+Route::get('/chef Projet/compte', [Compte::class , 'Compte' ])->name('Chef Projetcompte');
 Route::get('/chefProjet/projets', [chefProjetController::class , 'showProjets' ])->name('Chef Projetprojets');
-
+Route::get('/chefProjet/projets/suivre', [chefProjetController::class , 'suivre' ])->name('Chef Projetsuivre');
 Route::get('/developpeur/notification', [devController::class , 'showNotifications' ])->name('Developpeurnotification');
-Route::get('/developpeur/compte', [devController::class , 'Compte' ])->name('Developpeurcompte');
+Route::get('/Developpeur/compte', [Compte::class , 'Compte' ])->name('Developpeurcompte');
 Route::get('/developpeur/projets', [devController::class , 'showProjets' ])->name('Developpeurprojets');
-Route::get('/developpeur/projets/suivre', [devController::class , 'suivre' ])->name('Developpeursuivreprojet');
+Route::get('/developpeur/projets/suivre', [devController::class , 'suivre' ])->name('Developpeursuivre');
+Route::post('/ajouterReunion', [gererReunion::class, 'ajouterReunion'])->name('ajouterReunion');
+Route::post('/ajouterProjet', [gererProjet::class, 'ajouterProjet'])->name('ajouterProjet');
+Route::post('/redirects', [loginController::class , 'index' ])->name('redirects');
+Route::get('/', [loginController::class , 'login' ])->name('login');
+Route::delete('/annulerReunion', [gererReunion::class, 'destroy'])->name('annulerReunion');
+Route::post('/modifierReunion', [gererReunion::class, 'modifier'])->name('modifierReunion');
+Route::delete('/annulerProjet', [gererProjet::class, 'destroy'])->name('annulerProjet');
+Route::post('/modifierProjet', [gererProjet::class, 'modifier'])->name('modifierProjet');
+Route::post('/ajouterTache', [gererTache::class, 'ajouterTache'])->name('ajouterTache');
+Route::delete('/annulerTache', [gererTache::class, 'destroy'])->name('annulerTache');
+Route::post('/compte/changePassword', [Compte::class, 'changePassword'])->name('changePassword');
+Route::post('/ajouterEquipe', [AdminController::class, 'ajouterEquipe'])->name('ajouterEquipe');
+Route::delete('/supprimerEquipe', [AdminController::class, 'supprimerEquipe'])->name('supprimerEquipe');
+Route::post('/modifierEquipe', [AdminController::class, 'modifierEquipe'])->name('modifierEquipe');
+Route::post('/developpeur/projets/suivre/terminerTache', [devController::class, 'terminerTache'])->name('terminerTache');
+Route::post('/ajouterMembre', [AdminController::class, 'ajouterMembre'])->name('ajouterMembre');

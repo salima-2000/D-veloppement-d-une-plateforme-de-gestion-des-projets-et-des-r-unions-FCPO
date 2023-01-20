@@ -65,7 +65,7 @@
   box-shadow: 0 6px #e4e0d9;
   position: relative;
   top: 50px;
-  left: 150px;
+  left: 155px;
 }
 
 .card {
@@ -516,8 +516,7 @@ i {
 }
 
 .scroll-area-sm {
-  height: 288px;
-  overflow-x: hidden;
+  height: 180px;
 }
 
 .list-group-item {
@@ -525,7 +524,7 @@ i {
   display: block;
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
-  background-color: #fff;
+  background-color: #c5d7e6;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -598,4 +597,94 @@ i {
   color: #fff;
   background-color: #3ac47d;
   border-color: #3ac47d;
+}
+
+/***************  Modal *******************/
+.modal-body {
+  display: flex;
+  padding: 0;
+  border-radius: 4rem;
+}
+
+.modal-content {
+  border-radius: 4rem;
+  width: 140%;
+  box-shadow: -1px -2px 42px -19px rgba(0, 0, 0, 0.74);
+}
+
+.modal-content h1, .modal-content h2, .modal-content h3 {
+  text-align: center;
+}
+
+.modal-content h1 {
+  font-size: 1.3em;
+  text-transform: uppercase;
+}
+
+.column {
+  flex: 50%;
+  padding: 10px;
+}
+
+.column#main {
+  flex: 75%;
+  padding: 40px;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+#main .form-control {
+  border-radius: 50px;
+  box-shadow: 5px #03A9F4;
+  font-family: "Courier New", Courier, monospace;
+  color: gray;
+}
+
+.modal-body label {
+  font-family: "Times New Roman", Times, serif;
+  color: gray;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.sec-content {
+  margin-top: 80%;
+}
+
+.titreModal {
+  color: #46768B;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+  position: relative;
+  left: 7px;
+}
+
+.btnModal {
+  display: block;
+  width: 180px;
+  height: 45px;
+  font-size: 20px;
+  color: white;
+  background: #f0713b;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0 1px #e4e0d9;
+}
+
+.btonModal {
+  display: block;
+  width: 180px;
+  height: 45px;
+  font-size: 20px;
+  color: white;
+  background: grey;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0 1px #e4e0d9;
+  position: relative;
+  right: 190px;
 }

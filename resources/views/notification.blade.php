@@ -1,7 +1,15 @@
 @extends('layouts.layout')
 
 @section('content')
-<div style="padding-top:45px;" class="container-fluid text-center">
+@if(Session::get('success'))
+
+<div class="alert alert-success" role="alert">
+<button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Bienvenue :) </strong>Heureux de vous revoir {{Session::get('success')}}
+  </div>
+ @endif
+
+<div style="padding-top:5px;" class="container-fluid text-center">
 <section>
   <div class="square_box box_three"></div>
   <div class="square_box box_four"></div>
@@ -16,7 +24,7 @@
 									<span class="sr-only">Close</span>
 								</button>
           <i class="start-icon  fa fa-info-circle faa-shake animated"></i>
-          <strong class="font__weight-semibold">les dates de 2 réunions</strong>  ont été recemment modifiées
+          <strong class="font__weight-semibold">{{ $nombreChangement }}</strong> Nouveautés depuis  votre derniere connexion le  <?php echo $derniereConnexion ;?>.
         </div>
 
       </div>
@@ -26,19 +34,23 @@
 
     </div>
   </div>
+  @foreach($notifications as $notification)
 </section>
+@if($notification->importance=='annulation' )
   <div class="row" style="position:relative; left:70px;">
     <div class="col-xs-16 col-sm-10 col-sm-offset-3">
       <div class="new-message-box">
                     <div class="new-message-box-danger">
                         <div class="info-tab tip-icon-danger" title="error"><i></i></div>
                         <div class="tip-box-danger">
-                         <p>Soufyane Boukhriss a modifié la date de la réunion avec Monsieur ALBANNI</p>
+                         <p>{{ $notification->responsable }} {{$notification->action}} </p>
                         </div>
                     </div>
                 </div>
 </div>
 </div>
+@endif
+@if($notification->importance=='modification' )
   <!-- -->
    <div class="row" style="position:relative; left:70px;" >
     <div class="col-xs-16 col-sm-10 col-sm-offset-3">
@@ -47,12 +59,14 @@
                         <div class="info-tab tip-icon-success" title="success"><i></i></div>
                         <div class="tip-box-success">
                             <!--<p><strong>Tip:</strong> If you want to enable the fading transition effect while closing the alert boxes, apply the classes <code>.fade</code> and <code>.in</code> to them along with the contextual class.</p>-->
-                            <p>Soufyane Boukhriss a modifié la date de la réunion avec Madame bansaid</p>
+                            <p>{{ $notification->responsable }} {{$notification->action}}</p>
                         </div>
                     </div>
                 </div>
-</div>
-</div>
+      </div>
+   </div>
+@endif
+@if($notification->importance=='urgent' )
   <!-- -->
    <div class="row" style="position:relative; left:70px;">
     <div class="col-xs-16 col-sm-10 col-sm-offset-3">
@@ -61,13 +75,15 @@
                         <div class="info-tab tip-icon-warning" title="error"><i></i></div>
                         <div  class="tip-box-warning">
                           
-                            <p>Vous avez plannifié une réunion le 21/02/21 à 15:00 avec le representant al Bank Chaabi</p>
+                            <p>{{ $notification->responsable }} {{$notification->action}}</p>
                         </div>
                     </div>
                 </div>
 </div>
 </div>
+@endif
   <!-- -->
+  @if($notification->importance=='normal' )
    <div class="row" style="position:relative; left:70px;">
     <div class="col-xs-16 col-sm-10 col-sm-offset-3">
       <div class="new-message-box">
@@ -75,7 +91,7 @@
                         <div class="info-tab tip-icon-info" title="error"><i></i></div>
                         <div class="tip-box-info">
                             <!--<p><strong>Tip:</strong> If you want to enable the fading transition effect while closing the alert boxes, apply the classes <code>.fade</code> and <code>.in</code> to them along with the contextual class.</p>-->
-                            <p>Soufyane Boukhriss a a plannifié une réunion le 25/02/21 à 09:00 avec le representant al Irfane</p>
+                            <p>{{ $notification->responsable }}  {{$notification->action}}</p>
                         </div>
                     </div>
                 </div>
@@ -83,8 +99,8 @@
 </div>
    <!-- -->
    
-</div>
-		    
+@endif
+@endforeach		    
 @endsection
 @section('scripts')
 

@@ -4,7 +4,12 @@
 
 <div style="position:relative; top:50px;">
 <table id="example" class="table table-striped table-bordered" style="width:95% ;padding-top:60px;">
-        <thead>
+<?php 
+ $today = date("Y-m-d H:i:s");
+ $reunions=DB::table('reunion')->select('objetReunion', 'dateReunion','heureReunion','client','contactClient')
+                               ->where('dateReunion','<',date("Y-m-d"))->get();
+  ?>      
+ <thead>
             <tr>
                 <th>Objet de réunion</th>
                 <th>date de réunion</th>
@@ -15,30 +20,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Harum trium</td>
-                <td>23/07/202</td>
-                <td>15.30</td>
-                <td>nulli prorsus</td>
-                <td>062463298</td>
-                
-            </tr>
-            <tr>
-                <td>Harum trium</td>
-                <td>23/07/202</td>
-                <td>15.30</td>
-                <td>nulli prorsus</td>
-                <td>062463298</td>
-               
-            </tr>
-            <tr>
-                <td>Harum trium</td>
-                <td>23/07/202</td>
-                <td>15.30</td>
-                <td>nulli prorsus</td>
-                <td>062463298</td>
-               
-            </tr>
+        @foreach($reunions as $reunion)
+               <tr>
+                <td>{{ $reunion->objetReunion }}</td>
+                <td>{{ $reunion->dateReunion }}</td>
+                <td>{{ $reunion->heureReunion }}</td>
+                <td>{{ $reunion->client }}</td>
+                <td>{{ $reunion->contactClient }}</td>
+               </tr>
+        @endforeach
         </tbody>
       
     </table>
